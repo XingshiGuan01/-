@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全国运动会 - 运动员风采</title>
+    <!-- 引入Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 引入自定义CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* 运动员风采页自定义样式 */
+        .filter-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .filter-group {
+            margin-bottom: 20px;
+        }
+        
+        .athlete-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .athlete-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .athlete-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .athlete-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .athlete-info {
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .athlete-name {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .athlete-details {
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .filter-title {
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* 模态框样式 */
+        #athleteModal .modal-content {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        #athleteModal .modal-header {
+            border-bottom: none;
+            padding: 20px 24px 10px;
+        }
+        
+        #athleteModal .modal-body {
+            padding: 10px 24px 24px;
+        }
+        
+        .modal-athlete-photo {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .athlete-profile-info {
+            margin-bottom: 20px;
+        }
+        
+        .profile-item {
+            margin-bottom: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .profile-item:last-child {
+            border-bottom: none;
+        }
+        
+        .profile-label {
+            font-weight: 700;
+            color: #3498db;
+            margin-right: 12px;
+            min-width: 80px;
+            display: inline-block;
+        }
+        
+        .athlete-achievements {
+            margin-top: 24px;
+        }
+        
+        .athlete-achievements h4 {
+            color: #3498db;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        
+        .athlete-achievements ul {
+            padding-left: 20px;
+        }
+        
+        .athlete-achievements li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .filter-section {
+                padding: 15px;
+            }
+            
+            .athlete-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 15px;
+            }
+            
+            .athlete-photo {
+                height: 200px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .athlete-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .athlete-photo {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航栏 -->
+    <header class="fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <i class="fas fa-running"></i> 全国运动会
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">首页</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="schedule.html">赛事日程</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="events.html">赛事项目</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="athletes.html">运动员</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="news.html">新闻</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="live.html">赛事集锦</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">联系我们</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 页面内容 -->
+    <main class="container mt-5 pt-5">
+        <!-- 页面标题 -->
+        <div class="text-center mb-5 fade-in">
+            <h1>运动员风采</h1>
+            <p class="text-muted">了解全国运动会参赛运动员的精彩故事和辉煌成绩</p>
+        </div>
+
+        <!-- 筛选功能区 -->
+        <div class="filter-section bg-white shadow rounded-lg p-4 mb-5 transition-all">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="filter-group">
+                        <div class="filter-title text-primary fw-bold">按省份筛选</div>
+                        <select class="form-select rounded transition-all" id="provinceFilter">
+                            <option value="all">全部省份</option>
+                            <option value="北京">北京</option>
+                            <option value="上海">上海</option>
+                            <option value="广东">广东</option>
+                            <option value="浙江">浙江</option>
+                            <option value="江苏">江苏</option>
+                            <option value="山东">山东</option>
+                            <option value="辽宁">辽宁</option>
+                            <option value="四川">四川</option>
+                            <option value="湖北">湖北</option>
+                            <option value="福建">福建</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="filter-group">
+                        <div class="filter-title text-primary fw-bold">按项目筛选</div>
+                        <select class="form-select rounded transition-all" id="eventFilter">
+                            <option value="all">全部项目</option>
+                            <option value="田径">田径</option>
+                            <option value="游泳">游泳</option>
+                            <option value="乒乓球">乒乓球</option>
+                            <option value="羽毛球">羽毛球</option>
+                            <option value="篮球">篮球</option>
+                            <option value="排球">排球</option>
+                            <option value="体操">体操</option>
+                            <option value="跳水">跳水</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="filter-group">
+                        <div class="filter-title text-primary fw-bold">按性别筛选</div>
+                        <div class="form-check form-check-inline me-3">
+                            <input class="form-check-input rounded" type="radio" name="genderFilter" id="genderAll" value="all" checked>
+                            <label class="form-check-label" for="genderAll">全部</label>
+                        </div>
+                        <div class="form-check form-check-inline me-3">
+                            <input class="form-check-input rounded" type="radio" name="genderFilter" id="genderMale" value="男">
+                            <label class="form-check-label" for="genderMale">男</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input rounded" type="radio" name="genderFilter" id="genderFemale" value="女">
+                            <label class="form-check-label" for="genderFemale">女</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 运动员卡片网格 -->
+        <div class="athlete-grid" id="athleteGrid">
+            <!-- 运动员卡片将通过JavaScript动态生成 -->
+        </div>
+    </main>
+
+    <!-- 运动员详情模态框 -->
+    <div class="modal fade" id="athleteModal" tabindex="-1" aria-labelledby="athleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="athleteModalLabel">运动员详情</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img src="" alt="运动员照片" class="modal-athlete-photo" id="modalAthletePhoto">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="athlete-profile-info">
+                                    <h3 id="modalAthleteName"></h3>
+                                    <p class="text-muted" id="modalAthleteBasicInfo"></p>
+                                    <div class="profile-item">
+                                        <span class="profile-label">省份：</span>
+                                        <span id="modalAthleteProvince"></span>
+                                    </div>
+                                    <div class="profile-item">
+                                        <span class="profile-label">参赛项目：</span>
+                                        <span id="modalAthleteEvent"></span>
+                                    </div>
+                                    <div class="profile-item">
+                                        <span class="profile-label">出生日期：</span>
+                                        <span id="modalAthleteBirth"></span>
+                                    </div>
+                                    <div class="profile-item">
+                                        <span class="profile-label">身高：</span>
+                                        <span id="modalAthleteHeight"></span>
+                                    </div>
+                                    <div class="profile-item">
+                                        <span class="profile-label">体重：</span>
+                                        <span id="modalAthleteWeight"></span>
+                                    </div>
+                                </div>
+                                <div class="athlete-achievements">
+                                    <h4>主要成绩</h4>
+                                    <ul id="modalAthleteAchievements"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>个人简介</h4>
+                                <p id="modalAthleteBio"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>关于我们</h5>
+                    <p>全国运动会是中国规模最大、水平最高的综合性体育赛事，每四年举办一次。本网站为您提供全国运动会的赛事日程、项目介绍、运动员风采等信息。</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>联系方式</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt"></i> 地址：北京市朝阳区国家体育总局</li>
+                        <li><i class="fas fa-phone"></i> 电话：010-12345678</li>
+                        <li><i class="fas fa-envelope"></i> 邮箱：info@nationalgames.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>关注我们</h5>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-weibo"></i> 新浪微博</a>
+                        <a href="#" target="_blank"><i class="fab fa-weixin"></i> 微信公众号</a>
+                        <a href="#" target="_blank"><i class="fab fa-qq"></i> QQ群</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                    <p>&copy; 2024 全国运动会官方网站. 保留所有权利.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入Bootstrap JS -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- 引入自定义JS -->
+    <script src="js/script.js"></script>
+    <script>
+        // 运动员数据
+        const athletesData = [
+            {
+                id: 1,
+                name: "苏炳添",
+                province: "广东",
+                event: "田径",
+                gender: "男",
+                photo: "pic/athletes/sbt.jpg",
+                birth: "1989-08-29",
+                height: "172cm",
+                weight: "65kg",
+                bio: "苏炳添，中国田径短跑运动员，男子60米、100米亚洲纪录保持者。2015年，苏炳添在国际田联钻石联赛美国尤金站以9秒99的成绩获得男子100米第三名，成为首位进入9秒关口的黄种人。2021年，在东京奥运会男子100米半决赛中，苏炳添以9秒83的成绩打破亚洲纪录，成为首位闯入奥运会男子100米决赛的黄种人。",
+                achievements: [
+                    "2015年国际田联钻石联赛尤金站男子100米季军（9秒99）",
+                    "2018年雅加达亚运会男子100米冠军（9秒92）",
+                    "2021年东京奥运会男子100米半决赛亚洲纪录（9秒83）",
+                    "2021年东京奥运会男子4×100米接力第四名",
+                    "2017年第十三届全运会男子100米冠军"
+                ]
+            },
+            {
+                id: 2,
+                name: "李冰洁",
+                province: "河北",
+                event: "游泳",
+                gender: "女",
+                photo: "pic/athletes/lbj.jpg",
+                birth: "2002-03-03",
+                height: "175cm",
+                weight: "65kg",
+                bio: "李冰洁，中国女子游泳运动员，擅长自由泳项目。2017年，年仅15岁的李冰洁在第十三届全运会上横空出世，包揽女子400米、800米、1500米自由泳金牌，并打破亚洲纪录。2021年东京奥运会，李冰洁获得女子400米自由泳铜牌、女子4×200米自由泳接力金牌，并打破世界纪录。",
+                achievements: [
+                    "2017年第十三届全运会女子400米、800米、1500米自由泳冠军",
+                    "2021年东京奥运会女子400米自由泳铜牌",
+                    "2021年东京奥运会女子4×200米自由泳接力金牌（世界纪录）",
+                    "2018年雅加达亚运会女子800米、1500米自由泳冠军",
+                    "2022年短池世锦赛女子800米自由泳冠军"
+                ]
+            },
+            {
+                id: 3,
+                name: "马龙",
+                province: "北京",
+                event: "乒乓球",
+                gender: "男",
+                photo: "pic/athletes/ml.jpg",
+                birth: "1988-10-20",
+                height: "175cm",
+                weight: "70kg",
+                bio: "马龙，中国男子乒乓球运动员，世界乒乓球史上首位集奥运会、世锦赛、世界杯、亚运会、亚锦赛、亚洲杯、巡回赛总决赛、全运会单打冠军于一身的超级全满贯选手。马龙技术全面，打法稳健，被誉为乒乓球界的'六边形战士'。",
+                achievements: [
+                    "2016年里约奥运会男子单打、团体冠军",
+                    "2020年东京奥运会男子单打、团体冠军",
+                    "2015年、2017年、2019年世乒赛男子单打冠军",
+                    "2012年、2015年世界杯男子单打冠军",
+                    "2017年第十三届全运会男子单打冠军"
+                ]
+            },
+            {
+                id: 4,
+                name: "陈雨菲",
+                province: "浙江",
+                event: "羽毛球",
+                gender: "女",
+                photo: "pic/athletes/cyf.jpg",
+                birth: "1998-03-01",
+                height: "171cm",
+                weight: "60kg",
+                bio: "陈雨菲，中国女子羽毛球运动员，现世界排名第一。陈雨菲技术全面，打法稳健，心理素质过硬。2021年东京奥运会，陈雨菲获得女子单打金牌，成为中国羽毛球女单新的奥运冠军。",
+                achievements: [
+                    "2021年东京奥运会女子单打冠军",
+                    "2019年世界羽毛球锦标赛女子单打亚军",
+                    "2020年全英羽毛球公开赛女子单打冠军",
+                    "2021年苏迪曼杯混合团体冠军",
+                    "2017年第十三届全运会女子单打冠军"
+                ]
+            },
+            {
+                id: 5,
+                name: "郭艾伦",
+                province: "辽宁",
+                event: "篮球",
+                gender: "男",
+                photo: "pic/athletes/gal.jpg",
+                birth: "1993-11-14",
+                height: "192cm",
+                weight: "85kg",
+                bio: "郭艾伦，中国男子篮球运动员，司职控球后卫，现效力于辽宁本钢队。郭艾伦技术全面，突破犀利，传球视野开阔，是中国男篮的核心球员之一。",
+                achievements: [
+                    "2018年雅加达亚运会男子篮球冠军",
+                    "2017-2018赛季CBA联赛总冠军",
+                    "2021-2022赛季CBA联赛总冠军",
+                    "2017年第十三届全运会男子篮球亚军",
+                    "多次入选CBA全明星阵容"
+                ]
+            },
+            {
+                id: 6,
+                name: "朱婷",
+                province: "河南",
+                event: "排球",
+                gender: "女",
+                photo: "pic/athletes/zt.jpg",
+                birth: "1994-11-29",
+                height: "198cm",
+                weight: "78kg",
+                bio: "朱婷，中国女子排球运动员，司职主攻，现效力于土耳其瓦基弗银行队。朱婷技术全面，进攻犀利，拦网出色，是世界女子排坛最优秀的主攻手之一。",
+                achievements: [
+                    "2016年里约奥运会女子排球冠军",
+                    "2015年、2019年女排世界杯冠军",
+                    "2014年、2018年女排世锦赛亚军",
+                    "2017年第十三届全运会女子排球冠军（河南队）",
+                    "2017年、2018年土耳其女排超级联赛冠军"
+                ]
+            },
+            {
+                id: 7,
+                name: "孙杨",
+                province: "浙江",
+                event: "游泳",
+                gender: "男",
+                photo: "pic/athletes/sy.jpg",
+                birth: "1991-12-01",
+                height: "198cm",
+                weight: "89kg",
+                bio: "孙杨，中国男子游泳运动员，擅长自由泳项目。孙杨是世界泳坛历史上唯一一位男子200米、400米、1500米自由泳奥运会世锦赛大满贯冠军得主，史上唯一一位男子400米自由泳世锦赛四连冠，唯一一位男子800米自由泳世锦赛三连冠，男子自由泳个人单项金牌数居世界第一。",
+                achievements: [
+                    "2012年伦敦奥运会男子400米自由泳冠军",
+                    "2012年伦敦奥运会男子1500米自由泳冠军",
+                    "2016年里约奥运会男子200米自由泳冠军",
+                    "2017年第十三届全运会男子200米、400米、800米、1500米自由泳冠军",
+                    "2013年、2015年、2017年世锦赛男子400米自由泳冠军"
+                ]
+            },
+            {
+                id: 8,
+                name: "丁宁",
+                province: "北京",
+                event: "乒乓球",
+                gender: "女",
+                photo: "pic/athletes/dn.jpg",
+                birth: "1990-06-20",
+                height: "173cm",
+                weight: "64kg",
+                bio: "丁宁，中国女子乒乓球运动员，世界女子乒坛大满贯得主。丁宁技术全面，反手相持能力强，心理素质过硬，是中国女乒的领军人物之一。",
+                achievements: [
+                    "2016年里约奥运会女子单打、团体冠军",
+                    "2011年、2015年世乒赛女子单打冠军",
+                    "2011年、2014年世界杯女子单打冠军",
+                    "2017年第十三届全运会女子单打冠军",
+                    "2018年世乒赛女子团体冠军"
+                ]
+            },
+            {
+                id: 9,
+                name: "谌龙",
+                province: "福建",
+                event: "羽毛球",
+                gender: "男",
+                photo: "pic/athletes/zl.jpg",
+                birth: "1989-10-18",
+                height: "188cm",
+                weight: "78kg",
+                bio: "谌龙，中国男子羽毛球运动员，现世界排名第四。谌龙技术全面，防守稳健，进攻犀利，是中国羽毛球队的核心球员之一。2016年里约奥运会，谌龙获得男子单打金牌。",
+                achievements: [
+                    "2016年里约奥运会男子单打冠军",
+                    "2014年、2015年、2016年世界羽联超级系列赛总决赛冠军",
+                    "2015年世界羽毛球锦标赛男子单打冠军",
+                    "2018年雅加达亚运会男子单打冠军",
+                    "2017年第十三届全运会男子单打亚军"
+                ]
+            },
+            {
+                id: 10,
+                name: "傅园慧",
+                province: "浙江",
+                event: "游泳",
+                gender: "女",
+                photo: "pic/athletes/fyh.jpg",
+                birth: "1996-01-07",
+                height: "177cm",
+                weight: "63kg",
+                bio: "傅园慧，中国女子游泳运动员，擅长仰泳项目。傅园慧以其幽默的性格和夸张的表情在2016年里约奥运会上走红，被网友称为'洪荒少女'。",
+                achievements: [
+                    "2015年世界游泳锦标赛女子50米仰泳冠军",
+                    "2016年里约奥运会女子100米仰泳季军",
+                    "2017年世界游泳锦标赛女子50米仰泳亚军",
+                    "2017年第十三届全运会女子50米、100米仰泳冠军",
+                    "2018年雅加达亚运会女子50米仰泳冠军"
+                ]
+            }
+        ];
+        
+        // 运动员风采页特定功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 渲染运动员卡片
+            renderAthleteCards(athletesData);
+            
+            // 绑定筛选事件
+            bindFilterEvents();
+        });
+        
+        // 渲染运动员卡片
+        function renderAthleteCards(athletes) {
+            const athleteGrid = document.getElementById('athleteGrid');
+            athleteGrid.innerHTML = '';
+            
+            athletes.forEach(athlete => {
+                const card = document.createElement('div');
+                card.className = 'athlete-card bg-white rounded-lg shadow hover-shadow-lg transition-all hover-scale animate-fade-in';
+                card.style.animationDelay = `${Math.random() * 0.5}s`;
+                card.innerHTML = `
+                    <div class="relative overflow-hidden rounded-t-lg">
+                        <img src="${athlete.photo}" alt="${athlete.name}" class="athlete-photo w-full h-64 object-cover transition-transform hover:scale-110 duration-500" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-4 text-white">
+                                <span class="inline-block bg-primary/90 px-3 py-1 rounded-full text-sm font-medium">${athlete.event}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="athlete-info p-4">
+                        <h3 class="athlete-name text-primary mb-2 font-bold">${athlete.name}</h3>
+                        <div class="athlete-details flex items-center justify-center gap-2">
+                            <span class="inline-block bg-secondary/20 text-secondary px-3 py-1 rounded-full text-sm">${athlete.province}</span>
+                            <span class="inline-block bg-secondary/20 text-secondary px-3 py-1 rounded-full text-sm">${athlete.gender}</span>
+                        </div>
+                    </div>
+                `;
+                
+                // 绑定点击事件，打开模态框
+                card.addEventListener('click', () => {
+                    openAthleteModal(athlete);
+                });
+                
+                athleteGrid.appendChild(card);
+            });
+        }
+        
+        // 打开运动员详情模态框
+        function openAthleteModal(athlete) {
+            document.getElementById('modalAthleteName').textContent = athlete.name;
+            document.getElementById('modalAthleteBasicInfo').textContent = `${athlete.gender} | ${athlete.event}`;
+            document.getElementById('modalAthleteProvince').textContent = athlete.province;
+            document.getElementById('modalAthleteEvent').textContent = athlete.event;
+            document.getElementById('modalAthleteBirth').textContent = athlete.birth;
+            document.getElementById('modalAthleteHeight').textContent = athlete.height;
+            document.getElementById('modalAthleteWeight').textContent = athlete.weight;
+            document.getElementById('modalAthletePhoto').src = athlete.photo;
+            document.getElementById('modalAthleteBio').textContent = athlete.bio;
+            
+            // 渲染成绩列表
+            const achievementsList = document.getElementById('modalAthleteAchievements');
+            achievementsList.innerHTML = '';
+            athlete.achievements.forEach(achievement => {
+                const li = document.createElement('li');
+                li.className = 'mb-2 bg-light p-2 rounded';
+                li.textContent = achievement;
+                achievementsList.appendChild(li);
+            });
+            
+            // 打开模态框
+            const modal = new bootstrap.Modal(document.getElementById('athleteModal'));
+            modal.show();
+        }
+        
+        // 绑定筛选事件
+        function bindFilterEvents() {
+            const provinceFilter = document.getElementById('provinceFilter');
+            const eventFilter = document.getElementById('eventFilter');
+            const genderFilter = document.querySelectorAll('input[name="genderFilter"]');
+            
+            provinceFilter.addEventListener('change', applyFilters);
+            eventFilter.addEventListener('change', applyFilters);
+            genderFilter.forEach(radio => {
+                radio.addEventListener('change', applyFilters);
+            });
+        }
+        
+        // 应用筛选条件
+        function applyFilters() {
+            const selectedProvince = document.getElementById('provinceFilter').value;
+            const selectedEvent = document.getElementById('eventFilter').value;
+            const selectedGender = document.querySelector('input[name="genderFilter"]:checked').value;
+            
+            // 筛选运动员
+            const filteredAthletes = athletesData.filter(athlete => {
+                const matchProvince = selectedProvince === 'all' || athlete.province === selectedProvince;
+                const matchEvent = selectedEvent === 'all' || athlete.event === selectedEvent;
+                const matchGender = selectedGender === 'all' || athlete.gender === selectedGender;
+                
+                return matchProvince && matchEvent && matchGender;
+            });
+            
+            // 重新渲染运动员卡片
+            renderAthleteCards(filteredAthletes);
+            
+            // 显示筛选结果数量
+            const resultCount = filteredAthletes.length;
+            const resultInfo = document.createElement('div');
+            resultInfo.className = 'text-center mt-4 text-muted';
+            resultInfo.textContent = `共找到 ${resultCount} 名运动员`;
+            
+            // 移除旧的结果信息
+            const oldResultInfo = document.querySelector('.filter-result-info');
+            if (oldResultInfo) {
+                oldResultInfo.remove();
+            }
+            
+            // 添加新的结果信息
+            resultInfo.classList.add('filter-result-info');
+            document.getElementById('athleteGrid').parentNode.appendChild(resultInfo);
+        }
+    </script>
+</body>
+</html>

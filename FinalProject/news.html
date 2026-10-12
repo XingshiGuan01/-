@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻 - 全国运动会</title>
+    <!-- 引入Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 引入自定义CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- 头部导航栏 -->
+    <header class="fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <i class="fas fa-running"></i> 全国运动会
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">首页</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="schedule.html">赛事日程</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="events.html">赛事项目</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="athletes.html">运动员</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="news.html">新闻</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="live.html">集锦</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">联系我们</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="main-content mt-5 pt-5">
+        <!-- 页面标题 -->
+        <section class="page-header py-5">
+            <div class="container">
+                <h1 class="text-center">最新新闻</h1>
+                <p class="text-center text-muted">获取全国运动会的最新动态和赛事报道</p>
+            </div>
+        </section>
+
+        <!-- 搜索和筛选区域 -->
+        <section class="search-filter-section py-4 bg-light">
+            <div class="container">
+                <div class="row g-4">
+                    <!-- 搜索框 -->
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" id="newsSearch" class="form-control" placeholder="搜索新闻..." aria-label="搜索新闻">
+                            <button class="btn btn-primary" id="searchBtn" type="button">
+                                <i class="fas fa-search"></i> 搜索
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 分类筛选 -->
+                    <div class="col-md-6">
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-primary active" data-category="all">全部</button>
+                            <button class="btn btn-outline-primary" data-category="opening">开幕式</button>
+                            <button class="btn btn-outline-primary" data-category="competition">赛事报道</button>
+                            <button class="btn btn-outline-primary" data-category="athlete">运动员风采</button>
+                            <button class="btn btn-outline-primary" data-category="medal">奖牌榜</button>
+                            <button class="btn btn-outline-primary" data-category="culture">文化活动</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 新闻列表区域 -->
+        <section class="news-list-section py-5">
+            <div class="container">
+                <div class="row" id="newsList">
+                    <!-- 新闻内容将通过JavaScript动态生成 -->
+                </div>
+                
+                <!-- 加载指示器 -->
+                <div id="loadingIndicator" class="text-center py-5" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">加载中...</span>
+                    </div>
+                    <p class="mt-2">正在加载更多新闻...</p>
+                </div>
+                
+                <!-- 分页导航 -->
+                <nav id="pagination" class="mt-5 d-flex justify-content-center">
+                    <!-- 分页内容将通过JavaScript动态生成 -->
+                </nav>
+            </div>
+        </section>
+    </main>
+
+    <!-- 新闻详情模态框 -->
+    <div class="modal fade" id="newsDetailModal" tabindex="-1" aria-labelledby="newsDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newsDetailModalLabel">新闻详情</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="news-detail-header mb-4">
+                        <h3 id="newsDetailTitle"></h3>
+                        <div class="news-meta text-muted small mt-2">
+                            <span id="newsDetailDate"></span> | 
+                            <span id="newsDetailCategory"></span> | 
+                            <span id="newsDetailAuthor"></span>
+                        </div>
+                    </div>
+                    <div class="news-detail-image mb-4">
+                        <img id="newsDetailImage" src="" class="img-fluid rounded" alt="新闻图片">
+                    </div>
+                    <div class="news-detail-content" id="newsDetailContent">
+                        <!-- 新闻内容将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>关于我们</h5>
+                    <p>全国运动会是中国规模最大、水平最高的综合性体育赛事，每四年举办一次。本网站为您提供全国运动会的赛事日程、项目介绍、运动员风采等信息。</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>联系方式</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt"></i> 地址：北京市朝阳区国家体育总局</li>
+                        <li><i class="fas fa-phone"></i> 电话：010-12345678</li>
+                        <li><i class="fas fa-envelope"></i> 邮箱：info@nationalgames.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>关注我们</h5>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-weibo"></i> 新浪微博</a>
+                        <a href="#" target="_blank"><i class="fab fa-weixin"></i> 微信公众号</a>
+                        <a href="#" target="_blank"><i class="fab fa-qq"></i> QQ群</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                    <p>&copy; 2024 全国运动会官方网站. 保留所有权利.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入Bootstrap JS -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- 引入自定义JS -->
+    <script src="js/script.js"></script>
+    <!-- 新闻页面特定JS -->
+    <script>
+        // 新闻数据
+        const newsData = [
+            {
+                id: 1,
+                title: "第14届全国运动会开幕式筹备工作进入最后阶段",
+                category: "opening",
+                image: "pic/news/001.jpg",
+                date: "2024-09-10",
+                author: "新华社记者",
+                excerpt: "第14届全国运动会开幕式筹备工作已进入最后阶段，各项准备工作正在紧张有序地进行中。开幕式将以\"激情绽放，梦想飞扬\"为主题，展现中国体育的魅力和全国人民的精神风貌。",
+                content: "<p>第14届全国运动会开幕式筹备工作已进入最后阶段，各项准备工作正在紧张有序地进行中。开幕式将以\"激情绽放，梦想飞扬\"为主题，展现中国体育的魅力和全国人民的精神风貌。</p>\n<p>据了解，开幕式将于9月15日晚在西安奥体中心体育场举行，届时将有来自全国各地的运动员代表和观众共同见证这一历史时刻。开幕式的文艺表演将分为\"历史与文化\"、\"体育与梦想\"、\"未来与希望\"三个篇章，通过精彩的节目展示中国的历史文化底蕴和现代体育精神。</p>\n<p>为了确保开幕式的顺利进行，组委会已经组织了多次彩排和演练，对各项环节进行了精心的调整和优化。同时，安保、交通、医疗等各项保障工作也已经准备就绪，将为开幕式提供全方位的服务和保障。</p>"
+            },
+            {
+                id: 2,
+                title: "国家体育总局：全运会将推动全民健身事业发展",
+                category: "culture",
+                image: "pic/news/002.jpg",
+                date: "2024-09-08",
+                author: "体育日报记者",
+                excerpt: "国家体育总局副局长在近日的新闻发布会上表示，第14届全国运动会将成为推动全民健身事业发展的重要契机，通过举办高水平的体育赛事，激发全国人民参与体育锻炼的热情。",
+                content: "<p>国家体育总局副局长在近日的新闻发布会上表示，第14届全国运动会将成为推动全民健身事业发展的重要契机，通过举办高水平的体育赛事，激发全国人民参与体育锻炼的热情。</p>\n<p>据介绍，本届全运会将首次设立群众比赛项目，包括乒乓球、羽毛球、足球、篮球等多个深受群众喜爱的体育项目，吸引了来自全国各地的普通体育爱好者参与。这一举措旨在鼓励更多的人参与体育锻炼，推动全民健身事业的发展。</p>\n<p>此外，组委会还将在全运会期间举办一系列全民健身活动，包括健身展示、体育知识讲座、运动体验等，让更多的人了解体育、参与体育、热爱体育。同时，组委会还将利用全运会的影响力，推广科学健身理念，提高全民健康水平。</p>"
+            },
+            {
+                id: 3,
+                title: "多位奥运冠军将亮相全国运动会",
+                category: "athlete",
+                image: "pic/news/003.jpg",
+                date: "2024-09-05",
+                author: "央视体育记者",
+                excerpt: "第14届全国运动会即将拉开帷幕，多位奥运冠军将代表各自的省份参加比赛，为观众奉献精彩的赛事。",
+                content: "<p>第14届全国运动会即将拉开帷幕，多位奥运冠军将代表各自的省份参加比赛，为观众奉献精彩的赛事。</p>\n<p>据了解，本届全运会吸引了包括马龙、孙颖莎、樊振东、朱婷、郎平、苏炳添等在内的多位奥运冠军参赛。这些奥运冠军将在乒乓球、排球、田径等多个项目中亮相，与其他优秀运动员展开激烈的争夺。</p>\n<p>对于奥运冠军来说，全运会的比赛同样具有重要的意义。由于全运会的竞争激烈程度不亚于奥运会，因此每一位奥运冠军都将全力以赴，力争在比赛中取得好成绩。同时，全运会也是年轻运动员向奥运冠军学习的好机会，通过与奥运冠军同场竞技，年轻运动员可以积累经验，提高自己的技术水平。</p>"
+            },
+            {
+                id: 4,
+                title: "全运会赛事门票开始销售",
+                category: "competition",
+                image: "pic/news/004.jpg",
+                date: "2024-09-02",
+                author: "票务中心",
+                excerpt: "第14届全国运动会赛事门票已开始销售，观众可以通过官方网站、官方APP等渠道购买门票。",
+                content: "<p>第14届全国运动会赛事门票已开始销售，观众可以通过官方网站、官方APP等渠道购买门票。</p>\n<p>据票务中心介绍，本届全运会的门票价格从30元到500元不等，根据比赛项目、场次和座位位置的不同而有所差异。为了方便观众购票，组委会提供了多种购票渠道，包括官方网站、官方APP、线下售票点等。</p>\n<p>同时，组委会还推出了一系列优惠政策，包括学生票、团体票、残疾人票等，让更多的人有机会观看全运会的比赛。此外，组委会还提醒观众，购票时要选择官方渠道，避免购买假票，影响观赛体验。</p>"
+            },
+            {
+                id: 5,
+                title: "全运会志愿者培训工作圆满完成",
+                category: "culture",
+                image: "pic/news/005.jpg",
+                date: "2024-08-30",
+                author: "志愿者服务中心",
+                excerpt: "第14届全国运动会志愿者培训工作已圆满完成，来自全国各地的志愿者将为全运会提供优质的服务。",
+                content: "<p>第14届全国运动会志愿者培训工作已圆满完成，来自全国各地的志愿者将为全运会提供优质的服务。</p>\n<p>据志愿者服务中心介绍，本届全运会共招募了超过10万名志愿者，他们将在开幕式、闭幕式、赛事服务、交通引导、观众服务等多个岗位上提供服务。为了确保志愿者能够胜任各自的工作，组委会组织了为期两周的培训，包括通用知识培训、岗位技能培训、礼仪培训等。</p>\n<p>通过培训，志愿者们不仅掌握了必要的知识和技能，还增强了服务意识和团队合作精神。他们表示，将以饱满的热情和专业的服务，为全运会的成功举办贡献自己的力量。</p>"
+            },
+            {
+                id: 6,
+                title: "全运会奖牌榜最新排名",
+                category: "medal",
+                image: "pic/news/006.jpg",
+                date: "2024-09-12",
+                author: "赛事组委会",
+                excerpt: "第14届全国运动会赛程已过半，奖牌榜最新排名出炉，广东省暂列第一位，江苏省和山东省紧随其后。",
+                content: "<p>第14届全国运动会赛程已过半，奖牌榜最新排名出炉，广东省暂列第一位，江苏省和山东省紧随其后。</p>\n<p>截至目前，广东省共获得了35枚金牌、28枚银牌和22枚铜牌，总计85枚奖牌，暂列奖牌榜第一位。江苏省获得了32枚金牌、26枚银牌和24枚铜牌，总计82枚奖牌，排名第二位。山东省获得了28枚金牌、25枚银牌和27枚铜牌，总计80枚奖牌，排名第三位。</p>\n<p>其他省份中，浙江省、上海市、北京市等也都取得了不错的成绩。随着比赛的继续进行，奖牌榜的排名可能会发生变化，让我们拭目以待。</p>"
+            },
+            {
+                id: 7,
+                title: "乒乓球比赛首日精彩纷呈",
+                category: "competition",
+                image: "pic/news/007.jpg",
+                date: "2024-09-11",
+                author: "乒乓球专项记者",
+                excerpt: "第14届全国运动会乒乓球比赛首日比赛精彩纷呈，多位名将顺利晋级下一轮，为观众奉献了多场精彩的比赛。",
+                content: "<p>第14届全国运动会乒乓球比赛首日比赛精彩纷呈，多位名将顺利晋级下一轮，为观众奉献了多场精彩的比赛。</p>\n<p>在男子单打比赛中，奥运冠军马龙以4比0轻松战胜对手，顺利晋级下一轮。樊振东也以4比1的比分战胜对手，展现了强大的实力。在女子单打比赛中，孙颖莎以4比0战胜对手，陈梦也以4比1的比分晋级。</p>\n<p>除了单打比赛，双打比赛也同样精彩。马龙/许昕组合在男子双打比赛中以3比0战胜对手，展现了默契的配合。孙颖莎/王曼昱组合在女子双打比赛中也以3比0轻松晋级。</p>\n<p>首日比赛结束后，多位名将都表示，接下来的比赛将会更加激烈，他们会继续努力，争取取得更好的成绩。</p>"
+            },
+            {
+                id: 8,
+                title: "田径比赛明日开赛，苏炳添将冲击金牌",
+                category: "competition",
+                image: "pic/news/008.jpg",
+                date: "2024-09-13",
+                author: "田径专项记者",
+                excerpt: "第14届全国运动会田径比赛将于明日开赛，短跑名将苏炳添将代表广东省参加男子100米比赛，冲击金牌。",
+                content: "<p>第14届全国运动会田径比赛将于明日开赛，短跑名将苏炳添将代表广东省参加男子100米比赛，冲击金牌。</p>\n<p>作为亚洲短跑纪录保持者，苏炳添在今年的奥运会上取得了优异的成绩，成为首位进入奥运会男子100米决赛的中国运动员。此次参加全运会，苏炳添的目标是获得男子100米和200米的金牌，为广东省争光。</p>\n<p>除了苏炳添，其他田径项目的比赛也同样值得期待。在男子跳高比赛中，王宇将力争卫冕冠军。在女子铅球比赛中，巩立姣也将冲击金牌。在接力比赛中，多个省份的接力队都将展开激烈的争夺。</p>\n<p>田径比赛是全运会最受关注的比赛项目之一，相信明日的比赛一定会精彩纷呈，让我们拭目以待。</p>"
+            },
+            {
+                id: 9,
+                title: "全运会文化活动丰富多彩",
+                category: "culture",
+                image: "pic/news/009.jpg",
+                date: "2024-09-09",
+                author: "文化活动部",
+                excerpt: "第14届全国运动会期间，组委会将举办丰富多彩的文化活动，包括文艺演出、展览展示、民俗表演等，为观众带来一场文化盛宴。",
+                content: "<p>第14届全国运动会期间，组委会将举办丰富多彩的文化活动，包括文艺演出、展览展示、民俗表演等，为观众带来一场文化盛宴。</p>\n<p>据介绍，文化活动将分为\"体育文化\"、\"地域文化\"、\"民俗文化\"三个主题，通过不同的形式展示中国的文化魅力。在体育文化方面，将举办体育历史展览、体育摄影展等，展示中国体育的发展历程和成就。在地域文化方面，将举办陕西地方文化展览、非物质文化遗产展示等，展示陕西的历史文化底蕴。在民俗文化方面，将举办民俗表演、传统工艺展示等，展示中国的民俗文化魅力。</p>\n<p>此外，组委会还将邀请知名艺术家和文艺团体进行演出，包括音乐会、舞蹈表演、戏剧演出等，为观众带来精彩的文艺节目。这些文化活动将与体育赛事相结合，为全运会增添更多的文化内涵。</p>"
+            },
+            {
+                id: 10,
+                title: "全运会安保工作全面启动",
+                category: "culture",
+                image: "pic/news/010.jpg",
+                date: "2024-09-07",
+                author: "安保部",
+                excerpt: "为确保第14届全国运动会的顺利进行，安保工作已全面启动，各项安保措施已经落实到位。",
+                content: "<p>为确保第14届全国运动会的顺利进行，安保工作已全面启动，各项安保措施已经落实到位。</p>\n<p>据安保部介绍，本届全运会的安保工作将坚持\"安全第一、预防为主\"的原则，加强对场馆、住地、交通等重点部位的安保工作。同时，将加强与公安、武警、消防等部门的协作，形成安保工作合力。</p>\n<p>为了提高安保工作的效率和水平，组委会还将采用先进的安保技术，包括视频监控、人脸识别、X光检测等，确保各项安保措施的落实。同时，将加强对安保人员的培训，提高安保人员的业务水平和应急处理能力。</p>\n<p>组委会提醒观众，观看比赛时要遵守场馆的安保规定，配合安保人员的检查，共同维护比赛秩序和安全。</p>"
+            },
+            {
+                id: 11,
+                title: "全运会交通保障工作准备就绪",
+                category: "culture",
+                image: "pic/news/011.jpg",
+                date: "2024-09-04",
+                author: "交通保障部",
+                excerpt: "第14届全国运动会交通保障工作已准备就绪，将为运动员、观众和工作人员提供便捷的交通服务。",
+                content: "<p>第14届全国运动会交通保障工作已准备就绪，将为运动员、观众和工作人员提供便捷的交通服务。</p>\n<p>据交通保障部介绍，本届全运会将开通多条公交专线和地铁专列，连接各个比赛场馆和住地，方便运动员和工作人员的出行。同时，将加强对比赛场馆周边道路的交通管理，确保交通畅通。</p>\n<p>为了方便观众观看比赛，组委会还将在各个比赛场馆附近设置临时停车场，并提供免费的公交接驳服务。此外，组委会还将利用智能交通系统，实时监控交通状况，及时调整交通疏导方案，确保观众能够顺利到达比赛场馆。</p>\n<p>组委会提醒观众，观看比赛时尽量选择公共交通工具出行，避免自驾车，以减少交通拥堵。</p>"
+            },
+            {
+                id: 12,
+                title: "全运会医疗保障工作全面展开",
+                category: "culture",
+                image: "pic/news/012.jpg",
+                date: "2024-09-01",
+                author: "医疗保障部",
+                excerpt: "第14届全国运动会医疗保障工作已全面展开，将为运动员和观众提供全方位的医疗服务。",
+                content: "<p>第14届全国运动会医疗保障工作已全面展开，将为运动员和观众提供全方位的医疗服务。</p>\n<p>据医疗保障部介绍，本届全运会将在各个比赛场馆和住地设置医疗点，并配备专业的医疗人员和先进的医疗设备，确保能够及时处理各种医疗突发事件。同时，将开通医疗绿色通道，确保受伤的运动员能够及时得到治疗。</p>\n<p>此外，组委会还将加强对疫情的防控工作，严格落实各项疫情防控措施，包括体温检测、健康码查验、佩戴口罩等，确保全运会的安全举办。</p>\n<p>组委会提醒观众，观看比赛时要注意个人卫生，佩戴口罩，保持社交距离，共同维护良好的观赛环境。</p>"
+            },
+            {
+                id: 13,
+                title: "全运会开幕式门票销售火爆",
+                category: "opening",
+                image: "pic/news/013.jpg",
+                date: "2024-09-06",
+                author: "票务中心",
+                excerpt: "第14届全国运动会开幕式门票销售火爆，截至目前，门票已售出超过80%，剩余门票数量有限。",
+                content: "<p>第14届全国运动会开幕式门票销售火爆，截至目前，门票已售出超过80%，剩余门票数量有限。</p>\n<p>据票务中心介绍，开幕式门票自开始销售以来，受到了广大观众的热烈欢迎，每天都有大量的观众通过官方网站、官方APP等渠道购买门票。截至目前，开幕式门票已售出超过80%，剩余门票数量有限，想要观看开幕式的观众需要尽快购票。</p>\n<p>为了满足不同观众的需求，开幕式门票分为多个档次，价格从200元到2000元不等。观众可以根据自己的需求选择合适的门票。同时，组委会还推出了学生票和残疾人票等优惠政策，让更多的人有机会观看开幕式。</p>\n<p>开幕式将于9月15日晚在西安奥体中心体育场举行，相信这将是一场精彩绝伦的视觉盛宴，让我们共同期待。</p>"
+            },
+            {
+                id: 14,
+                title: "全运会吉祥物深受观众喜爱",
+                category: "culture",
+                image: "pic/news/014.jpg",
+                date: "2024-08-28",
+                author: "市场开发部",
+                excerpt: "第14届全国运动会吉祥物\"秦岭四宝\"深受观众喜爱，相关纪念品销售火爆，成为全运会的一道亮丽风景线。",
+                content: "<p>第14届全国运动会吉祥物\"秦岭四宝\"深受观众喜爱，相关纪念品销售火爆，成为全运会的一道亮丽风景线。</p>\n<p>据市场开发部介绍，本届全运会的吉祥物\"秦岭四宝\"是以朱鹮、大熊猫、羚牛、金丝猴为原型设计的，分别命名为\"朱朱\"、\"熊熊\"、\"羚羚\"、\"金金\"。这四个吉祥物形象可爱，寓意吉祥，深受观众的喜爱。</p>\n<p>吉祥物相关的纪念品包括毛绒玩具、钥匙扣、T恤衫、笔记本等多种类型，自开始销售以来，受到了广大观众的热烈欢迎。特别是毛绒玩具，销售量更是节节攀升，成为全运会最受欢迎的纪念品之一。</p>\n<p>市场开发部表示，将继续推出更多精美的吉祥物纪念品，满足观众的需求。同时，也欢迎观众到官方纪念品商店购买纪念品，支持全运会的举办。</p>"
+            },
+            {
+                id: 15,
+                title: "全运会志愿者展现青春风采",
+                category: "culture",
+                image: "pic/news/015.jpg",
+                date: "2024-09-14",
+                author: "志愿者服务中心",
+                excerpt: "第14届全国运动会期间，志愿者们以饱满的热情和专业的服务，展现了青春风采，成为全运会的一道亮丽风景线。",
+                content: "<p>第14届全国运动会期间，志愿者们以饱满的热情和专业的服务，展现了青春风采，成为全运会的一道亮丽风景线。</p>\n<p>据志愿者服务中心介绍，本届全运会共招募了超过10万名志愿者，他们分布在各个比赛场馆和住地，为运动员、观众和工作人员提供服务。志愿者们穿着统一的服装，佩戴着志愿者标志，以饱满的热情和专业的服务，赢得了大家的好评。</p>\n<p>在比赛场馆，志愿者们负责引导观众、维持秩序、提供咨询等服务。在住地，志愿者们负责接待运动员、安排交通、提供生活服务等。在新闻中心，志愿者们负责接待记者、提供采访协助等服务。无论在哪个岗位，志愿者们都以认真负责的态度，完成了各项工作任务。</p>\n<p>志愿者们表示，能够参与全运会的志愿服务，是一件非常光荣的事情。他们将继续努力，为全运会的成功举办贡献自己的力量。</p>"
+            }
+        ];
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 状态管理
+            let currentCategory = 'all';
+            let currentSearchTerm = '';
+            let currentPage = 1;
+            const newsPerPage = 6;
+            let totalPages = 1;
+            let filteredNews = [...newsData];
+
+            // 初始化页面
+            function initNewsPage() {
+                // 绑定事件
+                bindNewsEvents();
+                
+                // 初始加载新闻
+                loadNews();
+            }
+
+            // 绑定事件
+            function bindNewsEvents() {
+                // 搜索按钮点击事件
+                document.getElementById('searchBtn').addEventListener('click', function() {
+                    handleSearch();
+                });
+
+                // 回车键搜索
+                document.getElementById('newsSearch').addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        handleSearch();
+                    }
+                });
+
+                // 分类筛选事件
+                document.querySelectorAll('[data-category]').forEach(button => {
+                    button.addEventListener('click', function() {
+                        // 更新按钮样式
+                        document.querySelectorAll('[data-category]').forEach(btn => {
+                            btn.classList.remove('btn-primary');
+                            btn.classList.add('btn-outline-primary');
+                        });
+                        this.classList.remove('btn-outline-primary');
+                        this.classList.add('btn-primary');
+
+                        // 更新当前分类
+                        currentCategory = this.dataset.category;
+                        currentPage = 1;
+                        
+                        // 加载新闻
+                        loadNews();
+                    });
+                });
+            }
+
+            // 处理搜索
+            function handleSearch() {
+                currentSearchTerm = document.getElementById('newsSearch').value.trim();
+                currentPage = 1;
+                loadNews();
+            }
+
+            // 获取筛选后的新闻
+            function getFilteredNews() {
+                let result = [...newsData];
+
+                // 按分类筛选
+                if (currentCategory !== 'all') {
+                    result = result.filter(news => news.category === currentCategory);
+                }
+
+                // 按搜索词筛选
+                if (currentSearchTerm) {
+                    const searchTerm = currentSearchTerm.toLowerCase();
+                    result = result.filter(news => 
+                        news.title.toLowerCase().includes(searchTerm) || 
+                        news.excerpt.toLowerCase().includes(searchTerm) ||
+                        news.content.toLowerCase().includes(searchTerm)
+                    );
+                }
+
+                return result;
+            }
+
+            // 加载新闻
+            function loadNews() {
+                // 显示加载指示器
+                document.getElementById('loadingIndicator').style.display = 'block';
+
+                // 模拟网络延迟
+                setTimeout(() => {
+                    // 获取筛选后的新闻
+                    filteredNews = getFilteredNews();
+                    
+                    // 计算总页数
+                    totalPages = Math.ceil(filteredNews.length / newsPerPage);
+                    
+                    // 确保当前页不超过总页数
+                    if (currentPage > totalPages) {
+                        currentPage = totalPages;
+                    }
+
+                    // 获取当前页的新闻
+                    const startIndex = (currentPage - 1) * newsPerPage;
+                    const endIndex = startIndex + newsPerPage;
+                    const currentNews = filteredNews.slice(startIndex, endIndex);
+
+                    // 渲染新闻列表
+                    renderNewsList(currentNews);
+
+                    // 渲染分页
+                    renderPagination();
+
+                    // 隐藏加载指示器
+                    document.getElementById('loadingIndicator').style.display = 'none';
+                }, 500);
+            }
+
+            // 渲染新闻列表
+            function renderNewsList(newsList) {
+                const newsListContainer = document.getElementById('newsList');
+                
+                // 清空现有内容
+                newsListContainer.innerHTML = '';
+
+                // 如果没有新闻，显示提示信息
+                if (newsList.length === 0) {
+                    newsListContainer.innerHTML = `
+                        <div class="col-12 text-center py-5">
+                            <i class="fas fa-newspaper fa-3x text-muted mb-3"></i>
+                            <h4>没有找到相关新闻</h4>
+                            <p class="text-muted">请尝试调整搜索条件或分类筛选</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // 渲染新闻列表
+                newsList.forEach(news => {
+                    const newsCard = document.createElement('div');
+                    newsCard.className = 'col-md-4 mb-4';
+                    newsCard.innerHTML = `
+                        <div class="card h-100 hover-shadow-lg transition-all">
+                            <img src="${news.image}" class="card-img-top" alt="${news.title}" loading="lazy">
+                            <div class="card-body d-flex flex-column">
+                                <div class="news-meta small text-muted mb-2">
+                                    <span class="badge bg-primary">${getCategoryName(news.category)}</span> | 
+                                    <span>${news.date}</span>
+                                </div>
+                                <h5 class="card-title">${news.title}</h5>
+                                <p class="card-text flex-grow-1">${news.excerpt}</p>
+                                <div class="news-author small text-muted mb-3">
+                                    作者：${news.author}
+                                </div>
+                                <button class="btn btn-primary mt-auto" onclick="showNewsDetail(${news.id})">
+                                    <i class="fas fa-eye"></i> 查看详情
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    newsListContainer.appendChild(newsCard);
+                });
+            }
+
+            // 渲染分页
+            function renderPagination() {
+                const paginationContainer = document.getElementById('pagination');
+                paginationContainer.innerHTML = '';
+
+                // 如果只有一页，不需要分页
+                if (totalPages <= 1) {
+                    return;
+                }
+
+                // 创建分页元素
+                const ul = document.createElement('ul');
+                ul.className = 'pagination';
+
+                // 上一页按钮
+                const prevLi = document.createElement('li');
+                prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+                prevLi.innerHTML = `
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                `;
+                prevLi.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (currentPage > 1) {
+                        currentPage--;
+                        loadNews();
+                    }
+                });
+                ul.appendChild(prevLi);
+
+                // 页码按钮
+                for (let i = 1; i <= totalPages; i++) {
+                    const li = document.createElement('li');
+                    li.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                    li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                    li.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        currentPage = i;
+                        loadNews();
+                    });
+                    ul.appendChild(li);
+                }
+
+                // 下一页按钮
+                const nextLi = document.createElement('li');
+                nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+                nextLi.innerHTML = `
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                `;
+                nextLi.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        loadNews();
+                    }
+                });
+                ul.appendChild(nextLi);
+
+                paginationContainer.appendChild(ul);
+            }
+
+            // 显示新闻详情
+            window.showNewsDetail = function(newsId) {
+                // 查找新闻
+                const news = newsData.find(n => n.id === newsId);
+                if (!news) return;
+
+                // 更新模态框内容
+                document.getElementById('newsDetailTitle').textContent = news.title;
+                document.getElementById('newsDetailDate').textContent = news.date;
+                document.getElementById('newsDetailCategory').textContent = getCategoryName(news.category);
+                document.getElementById('newsDetailAuthor').textContent = news.author;
+                document.getElementById('newsDetailImage').src = news.image;
+                document.getElementById('newsDetailImage').alt = news.title;
+                document.getElementById('newsDetailContent').innerHTML = news.content;
+
+                // 显示模态框
+                const modal = new bootstrap.Modal(document.getElementById('newsDetailModal'));
+                modal.show();
+            }
+
+            // 获取分类名称
+            function getCategoryName(category) {
+                const categoryMap = {
+                    'opening': '开幕式',
+                    'competition': '赛事报道',
+                    'athlete': '运动员风采',
+                    'medal': '奖牌榜',
+                    'culture': '文化活动'
+                };
+                return categoryMap[category] || category;
+            }
+
+            // 初始化页面
+            initNewsPage();
+        });
+    </script>
+</body>
+</html>

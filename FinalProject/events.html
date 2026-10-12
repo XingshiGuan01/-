@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全国运动会 - 赛事项目介绍</title>
+    <!-- SEO优化 -->
+    <meta name="description" content="全国运动会赛事项目介绍，包括田径、游泳、球类、体操等多个比赛项目的详细信息、规则和往届冠军。">
+    <meta name="keywords" content="全国运动会,赛事项目,田径,游泳,球类,体操,苏炳添,全运会">
+    <meta name="author" content="全国运动会组委会">
+    
+    <!-- 预加载关键CSS -->
+    <link rel="preload" href="css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- 非关键CSS延迟加载 -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'">
+    
+    <!-- 图标库延迟加载 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <!-- 核心内联样式 -->
+    <style>
+        /* 关键渲染路径样式 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        main {
+            margin-top: 80px;
+        }
+        
+        /* 减少重绘重排的基础样式 */
+        .event-card {
+            will-change: transform;
+        }
+    </style>
+    
+    <!-- 结构化数据 (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsEvent",
+      "name": "全国运动会赛事项目",
+      "description": "全国运动会赛事项目介绍，包括田径、游泳、球类、体操等多个比赛项目的详细信息、规则和往届冠军。",
+      "url": "https://www.nationalgames.com/events.html",
+      "startDate": "2024-09-01",
+      "endDate": "2024-09-15",
+      "location": {
+        "@type": "Place",
+        "name": "全国运动会主体育场",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "北京市",
+          "addressRegion": "北京",
+          "addressCountry": "中国"
+        }
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "全国运动会组委会",
+        "url": "https://www.nationalgames.com"
+      },
+      "about": {
+        "@type": "SportsOrganization",
+        "name": "全国运动会",
+        "sport": ["田径", "游泳", "乒乓球", "羽毛球", "篮球", "武术散打", "体操"]
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- 头部导航栏 -->
+    <header class="fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <i class="fas fa-running"></i> 全国运动会
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">首页</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="schedule.html">赛事日程</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="events.html">赛事项目</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="athletes.html">运动员</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="news.html">新闻</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="live.html">集锦</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">联系我们</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 页面内容 -->
+    <main class="container mt-5 pt-5">
+        <!-- 页面标题 -->
+        <div class="text-center mb-5 fade-in">
+            <h1>赛事项目</h1>
+            <p class="text-muted">了解全国运动会各个赛事项目的详细信息</p>
+        </div>
+
+        <!-- 分类导航 -->
+        <div class="category-nav bg-white rounded p-4 shadow mb-5">
+            <h2 class="visually-hidden">赛事项目分类</h2>
+            <style>
+                /* 确保导航链接文字清晰可见 */
+                .category-nav .nav-link {
+                    color: #333 !important;
+                    -webkit-text-fill-color: #333 !important;
+                    background-color: transparent !important;
+                }
+                .category-nav .nav-link.active {
+                    color: #fff !important;
+                    -webkit-text-fill-color: #fff !important;
+                    background-color: #0d6efd !important;
+                }
+            </style>
+            <ul class="nav flex-wrap gap-2" id="categoryTabs" role="tablist" aria-label="赛事项目分类">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active hover-scale transition-all" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true" aria-label="全部项目">全部项目</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link hover-scale transition-all" id="track-and-field-tab" data-bs-toggle="tab" data-bs-target="#track-and-field" type="button" role="tab" aria-controls="track-and-field" aria-selected="false" aria-label="田径项目">田径</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link hover-scale transition-all" id="aquatics-tab" data-bs-toggle="tab" data-bs-target="#aquatics" type="button" role="tab" aria-controls="aquatics" aria-selected="false" aria-label="水上项目">水上项目</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link hover-scale transition-all" id="ball-games-tab" data-bs-toggle="tab" data-bs-target="#ball-games" type="button" role="tab" aria-controls="ball-games" aria-selected="false" aria-label="球类运动">球类运动</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link hover-scale transition-all" id="combat-tab" data-bs-toggle="tab" data-bs-target="#combat" type="button" role="tab" aria-controls="combat" aria-selected="false" aria-label="格斗类项目">格斗类</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link hover-scale transition-all" id="gymnastics-tab" data-bs-toggle="tab" data-bs-target="#gymnastics" type="button" role="tab" aria-controls="gymnastics" aria-selected="false" aria-label="体操项目">体操</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 项目详情卡片 -->
+        <div class="tab-content" id="categoryTabsContent">
+            <!-- 全部项目 -->
+            <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                <!-- 田径项目 -->
+                <div class="event-card bg-white rounded shadow mb-4 hover-shadow-lg transition-all" data-category="track-and-field" role="article" aria-labelledby="track-and-field-title" aria-describedby="track-and-field-desc">
+                    <div class="event-card-header d-flex align-items-center p-4 bg-gradient-primary-light" role="heading" aria-level="2">
+                        <i class="fas fa-running event-icon text-primary" aria-hidden="true"></i>
+                        <h3 class="mb-0 fw-medium" id="track-and-field-title">田径</h3>
+                    </div>
+                    <div class="event-card-body p-4">
+                        <p class="mb-4" id="track-and-field-desc">田径是体育运动中最古老的项目之一，包括径赛、田赛和全能比赛。全国运动会的田径比赛是最受关注的项目之一，汇聚了全国顶尖的田径运动员。</p>
+                        
+                        <div class="event-rules bg-light-primary rounded p-4 border-l-4 border-primary" role="region" aria-labelledby="track-and-field-rules">
+                            <h5 class="fw-medium mb-2" id="track-and-field-rules">项目规则简述</h5>
+                            <p class="mb-0">田径比赛分为径赛（跑道上的项目）、田赛（跳跃和投掷项目）和全能比赛（包含多个田径项目的综合比赛）。径赛项目以时间计算成绩，田赛项目以高度或远度计算成绩，全能项目则根据各单项成绩计算总分。</p>
+                        </div>
+                        
+                        <div class="past-champions mt-4" role="region" aria-labelledby="track-and-field-champions">
+                            <h5 class="fw-medium mb-2" id="track-and-field-champions">往届冠军</h5>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>男子100米：</strong> 苏炳添（广东）- 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>女子100米：</strong> 韦永丽（广西）- 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary">
+                                <strong>男子200米：</strong> 谢震业（浙江）- 2017年第十三届全运会
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer p-4">
+                        <button class="btn btn-link hover-scale transition-all" type="button" data-bs-toggle="collapse" data-bs-target="#trackAndFieldDetails" aria-expanded="false" aria-controls="trackAndFieldDetails" aria-label="查看田径项目更多详情">
+                            查看更多详情 <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="collapse" id="trackAndFieldDetails">
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6>田径项目详细介绍</h6>
+                                <p>田径运动是各项体育运动的基础，它能全面地、有效地发展人的身体素质和运动技能，对其他各项运动技术的发展和成绩的提高都有很好的作用。因此，各项体育运动都把田径运动作为发展身体素质的训练手段。实践证明，许多优秀运动员，特别是球类运动员，都有较高的田径运动能力。</p>
+                                <p>田径运动包括竞走、跑、跳跃、投掷以及由跑、跳、跃、投掷的部分项目组成的全能运动，共计四十多项。以时间计算成绩的项目叫径赛；以高度或远度计算成绩的项目叫田赛；全能运动项目，则是以各单项成绩按《田径运动评分表》换算分数计算成绩。</p>
+                                <h6>比赛项目</h6>
+                                <ul>
+                                    <li>径赛项目：100米、200米、400米、800米、1500米、5000米、10000米、110米栏、400米栏、3000米障碍、4×100米接力、4×400米接力</li>
+                                    <li>田赛项目：跳高、撑杆跳高、跳远、三级跳远、铅球、铁饼、链球、标枪</li>
+                                    <li>全能项目：男子十项全能、女子七项全能</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 游泳项目 -->
+                <div class="event-card bg-white rounded shadow mb-4 hover-shadow-lg transition-all" data-category="aquatics" role="article" aria-labelledby="swimming-title" aria-describedby="swimming-desc">
+                    <div class="event-card-header d-flex align-items-center p-4 bg-gradient-primary-light" role="heading" aria-level="2">
+                        <i class="fas fa-swimmer event-icon text-primary" aria-hidden="true"></i>
+                        <h3 class="mb-0 fw-medium" id="swimming-title">游泳</h3>
+                    </div>
+                    <div class="event-card-body p-4">
+                        <p class="mb-4" id="swimming-desc">游泳是一项全身性的运动，包括自由泳、仰泳、蛙泳和蝶泳等多种姿势。全国运动会的游泳比赛展现了中国游泳运动员的实力和风采。</p>
+                        
+                        <div class="event-rules bg-light-primary rounded p-4 border-l-4 border-primary" role="region" aria-labelledby="swimming-rules">
+                            <h5 class="fw-medium mb-2" id="swimming-rules">项目规则简述</h5>
+                            <p class="mb-0">游泳比赛分为自由泳、仰泳、蛙泳、蝶泳和混合泳等项目。比赛时，运动员必须按照规定的姿势游完全程，否则将被判犯规。成绩以时间计算，用时越少成绩越好。</p>
+                        </div>
+                        
+                        <div class="past-champions mt-4" role="region" aria-labelledby="swimming-champions">
+                            <h5 class="fw-medium mb-2" id="swimming-champions">往届冠军</h5>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>男子100米自由泳：</strong> 宁泽涛（河南）- 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>女子200米自由泳：</strong> 李冰洁（河北）- 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>男子200米混合泳：</strong> 汪顺（浙江）- 2017年第十三届全运会
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer p-4">
+                        <button class="btn btn-link hover-scale transition-all" type="button" data-bs-toggle="collapse" data-bs-target="#swimmingDetails" aria-expanded="false" aria-controls="swimmingDetails" aria-label="查看游泳项目更多详情">
+                            查看更多详情 <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="collapse" id="swimmingDetails">
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6>游泳项目详细介绍</h6>
+                                <p>游泳是人类凭借自身动作，使身体在水中游动的一项有意识的技能活动。游泳运动可分为竞技游泳和实用游泳。竞技游泳是指有特定技术要求，按游泳竞赛规则规定进行竞赛的游泳项目。它包括自由泳、仰泳、蛙泳和蝶泳四种泳姿的竞速项目，以及花样游泳等。</p>
+                                <p>游泳是一项对身体非常有益的运动，它可以增强心肺功能，提高身体的柔韧性和协调性，同时也是一项很好的全身运动，几乎可以锻炼到身体的所有肌肉群。</p>
+                                <h6>比赛项目</h6>
+                                <ul>
+                                    <li>自由泳：50米、100米、200米、400米、800米、1500米</li>
+                                    <li>仰泳：50米、100米、200米</li>
+                                    <li>蛙泳：50米、100米、200米</li>
+                                    <li>蝶泳：50米、100米、200米</li>
+                                    <li>混合泳：200米个人混合泳、400米个人混合泳、4×100米混合泳接力、4×200米自由泳接力</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 乒乓球项目 -->
+                <div class="event-card bg-white rounded shadow mb-4 hover-shadow-lg transition-all" data-category="ball-games" role="article" aria-labelledby="table-tennis-title" aria-describedby="table-tennis-desc">
+                    <div class="event-card-header d-flex align-items-center p-4 bg-gradient-primary-light" role="heading" aria-level="2">
+                        <i class="fas fa-table-tennis event-icon text-primary" aria-hidden="true"></i>
+                        <h3 class="mb-0 fw-medium" id="table-tennis-title">乒乓球</h3>
+                    </div>
+                    <div class="event-card-body p-4">
+                        <p class="mb-4" id="table-tennis-desc">乒乓球是中国的国球，全国运动会的乒乓球比赛竞争异常激烈，汇聚了世界顶尖的乒乓球运动员，展现了中国乒乓球的强大实力。</p>
+                        
+                        <div class="event-rules bg-light-primary rounded p-4 border-l-4 border-primary" role="region" aria-labelledby="table-tennis-rules">
+                            <h5 class="fw-medium mb-2" id="table-tennis-rules">项目规则简述</h5>
+                            <p class="mb-0">乒乓球比赛采用11分制，先得11分的一方获胜，但必须领先对手至少2分。比赛分为单打和双打项目，运动员使用乒乓球拍击球，使球越过球网并落在对方的球台上，对方未能合法回击则得分。</p>
+                        </div>
+                        
+                        <div class="past-champions mt-4" role="region" aria-labelledby="table-tennis-champions">
+                            <h5 class="fw-medium mb-2" id="table-tennis-champions">往届冠军</h5>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>男子单打：</strong> 马龙（北京）- 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>女子单打：</strong> 丁宁（北京）- 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>男子双打：</strong> 樊振东/周雨（解放军队）- 2017年第十三届全运会
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer p-4">
+                        <button class="btn btn-link hover-scale transition-all" type="button" data-bs-toggle="collapse" data-bs-target="#tableTennisDetails" aria-expanded="false" aria-controls="tableTennisDetails" aria-label="查看乒乓球项目更多详情">
+                            查看更多详情 <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="collapse" id="tableTennisDetails">
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6>乒乓球项目详细介绍</h6>
+                                <p>乒乓球，中国国球，是一种世界流行的球类体育项目，包括进攻、对抗和防守。比赛分团体、单打、双打等数种；2001年9月1日前以21分为一局，现以11分为一局；采用五局三胜，七局四胜。乒乓球为圆球状，重2.53-2.70克，白或橙色，用赛璐珞或塑料制成。</p>
+                                <p>乒乓球运动于19世纪末起源于英国。1959年，容国团获得了第二十五届世界乒乓球锦标赛男子单打冠军后，中国运动员开始登上了国际乒坛，直至今天，被称为中国的“国球”。</p>
+                                <h6>比赛项目</h6>
+                                <ul>
+                                    <li>男子单打</li>
+                                    <li>女子单打</li>
+                                    <li>男子双打</li>
+                                    <li>女子双打</li>
+                                    <li>混合双打</li>
+                                    <li>男子团体</li>
+                                    <li>女子团体</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 羽毛球项目 -->
+                <div class="event-card bg-white rounded shadow mb-4 hover-shadow-lg transition-all" data-category="ball-games" role="article" aria-labelledby="badminton-title" aria-describedby="badminton-desc">
+                    <div class="event-card-header d-flex align-items-center p-4 bg-gradient-primary-light" role="heading" aria-level="2">
+                        <i class="fas fa-feather-alt event-icon text-primary" aria-hidden="true"></i>
+                        <h3 class="mb-0 fw-medium" id="badminton-title">羽毛球</h3>
+                    </div>
+                    <div class="event-card-body p-4">
+                        <p class="mb-4" id="badminton-desc">羽毛球是一项深受人们喜爱的球类运动，全国运动会的羽毛球比赛汇聚了全国顶尖的羽毛球运动员，比赛精彩纷呈。</p>
+                        
+                        <div class="event-rules bg-light-primary rounded p-4 border-l-4 border-primary" role="region" aria-labelledby="badminton-rules">
+                            <h5 class="fw-medium mb-2" id="badminton-rules">项目规则简述</h5>
+                            <p class="mb-0">羽毛球比赛采用21分制，先得21分的一方获胜，但必须领先对手至少2分。比赛分为单打和双打项目，运动员使用羽毛球拍击球，使球越过球网并落在对方的场地上，对方未能合法回击则得分。</p>
+                        </div>
+                        
+                        <div class="past-champions mt-4" role="region" aria-labelledby="badminton-champions">
+                            <h5 class="fw-medium mb-2" id="badminton-champions">往届冠军</h5>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>男子单打：</strong> 林丹（北京）- 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>女子单打：</strong> 陈雨菲（浙江）- 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>男子双打：</strong> 傅海峰/张楠（广东/北京）- 2017年第十三届全运会
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer p-4">
+                        <button class="btn btn-link hover-scale transition-all" type="button" data-bs-toggle="collapse" data-bs-target="#badmintonDetails" aria-expanded="false" aria-controls="badmintonDetails" aria-label="查看羽毛球项目更多详情">
+                            查看更多详情 <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="collapse" id="badmintonDetails">
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6>羽毛球项目详细介绍</h6>
+                                <p>羽毛球是一项隔着球网，使用长柄网状球拍击打用羽毛和软木制作而成的一种小型球类的室内运动项目。羽毛球比赛在长方形的场地上进行，场地中间有网相隔，双方运用各种发球、击球和移动等技战术，将球在网上往返对击，以不使球落在本方有效区域内，或使对方击球失误为胜。</p>
+                                <p>羽毛球运动起源于19世纪70年代的英国，1992年巴塞罗那奥运会上，羽毛球成为正式比赛项目。中国羽毛球运动在世界上处于领先地位，多次获得奥运会和世界锦标赛的冠军。</p>
+                                <h6>比赛项目</h6>
+                                <ul>
+                                    <li>男子单打</li>
+                                    <li>女子单打</li>
+                                    <li>男子双打</li>
+                                    <li>女子双打</li>
+                                    <li>混合双打</li>
+                                    <li>男子团体</li>
+                                    <li>女子团体</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 篮球项目 -->
+                <div class="event-card bg-white rounded shadow mb-4 hover-shadow-lg transition-all" data-category="ball-games">
+                    <div class="event-card-header d-flex align-items-center p-4 bg-gradient-primary-light">
+                        <i class="fas fa-basketball-ball event-icon text-primary"></i>
+                        <h3 class="mb-0 fw-medium">篮球</h3>
+                    </div>
+                    <div class="event-card-body p-4">
+                        <p class="mb-4">篮球是一项流行的团队球类运动，全国运动会的篮球比赛吸引了众多观众的关注，展现了中国篮球的发展水平。</p>
+                        
+                        <div class="event-rules bg-light-primary rounded p-4 border-l-4 border-primary">
+                            <h5 class="fw-medium mb-2">项目规则简述</h5>
+                            <p class="mb-0">篮球比赛每队5人上场，比赛分为四节，每节10分钟（NBA为12分钟）。比赛的目标是将球投入对方的篮筐得分，同时阻止对方得分。得分方式包括两分球、三分球和罚球。</p>
+                        </div>
+                        
+                        <div class="past-champions mt-4">
+                            <h5 class="fw-medium mb-2">往届冠军</h5>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>男子篮球：</strong> 广东队 - 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>女子篮球：</strong> 解放军队 - 2017年第十三届全运会
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer p-4">
+                        <button class="btn btn-link hover-scale transition-all" type="button" data-bs-toggle="collapse" data-bs-target="#basketballDetails" aria-expanded="false" aria-controls="basketballDetails">
+                            查看更多详情 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="collapse" id="basketballDetails">
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6>篮球项目详细介绍</h6>
+                                <p>篮球，起源于美国马萨诸塞州，是1891年12月21日由詹姆斯·奈史密斯创造，是奥运会核心比赛项目，是以手为中心的身体对抗性体育运动。</p>
+                                <p>篮球运动是一项集体性运动，它不仅要求运动员具有娴熟的个人技术，还需要运动员之间的密切配合和团队合作精神。篮球运动具有很强的观赏性和竞技性，深受世界各国人民的喜爱。</p>
+                                <h6>比赛项目</h6>
+                                <ul>
+                                    <li>男子篮球</li>
+                                    <li>女子篮球</li>
+                                    <li>三人篮球男子组</li>
+                                    <li>三人篮球女子组</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 武术散打项目 -->
+                <div class="event-card bg-white rounded shadow mb-4 hover-shadow-lg transition-all" data-category="combat">
+                    <div class="event-card-header d-flex align-items-center p-4 bg-gradient-primary-light">
+                        <i class="fas fa-fist-raised event-icon text-primary"></i>
+                        <h3 class="mb-0 fw-medium">武术散打</h3>
+                    </div>
+                    <div class="event-card-body p-4">
+                        <p class="mb-4">武术散打是中国传统武术的重要组成部分，全国运动会的武术散打比赛展现了中国武术运动员的实力和风采。</p>
+                        
+                        <div class="event-rules bg-light-primary rounded p-4 border-l-4 border-primary">
+                            <h5 class="fw-medium mb-2">项目规则简述</h5>
+                            <p class="mb-0">武术散打比赛采用三局两胜制，每局2分钟，局间休息1分钟。比赛中运动员可以使用拳、腿、摔等技术动作攻击对手，得分多者获胜。</p>
+                        </div>
+                        
+                        <div class="past-champions mt-4">
+                            <h5 class="fw-medium mb-2">往届冠军</h5>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>男子65公斤级：</strong> 许家恒（陕西）- 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>女子60公斤级：</strong> 蔡颖颖（江苏）- 2017年第十三届全运会
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer p-4">
+                        <button class="btn btn-link hover-scale transition-all" type="button" data-bs-toggle="collapse" data-bs-target="#wushuDetails" aria-expanded="false" aria-controls="wushuDetails">
+                            查看更多详情 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="collapse" id="wushuDetails">
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6>武术散打项目详细介绍</h6>
+                                <p>武术散打是中国武术的重要组成部分，是一项集踢、打、摔于一体的格斗运动，具有浓郁的中国特色和民族风格。武术散打比赛规则科学、合理，注重攻防转换和技术全面性，是一项极具观赏性和竞技性的体育项目。</p>
+                                <p>武术散打运动起源于中国，是在中国传统武术的基础上发展起来的一项现代竞技体育项目。经过多年的发展，武术散打已经成为国际武术联合会的正式比赛项目，并在世界范围内得到了广泛的推广和普及。</p>
+                                <h6>比赛项目</h6>
+                                <ul>
+                                    <li>男子项目：48公斤级、52公斤级、56公斤级、60公斤级、65公斤级、70公斤级、75公斤级、80公斤级、85公斤级、90公斤级、100公斤级</li>
+                                    <li>女子项目：48公斤级、52公斤级、56公斤级、60公斤级、65公斤级、70公斤级</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 体操项目 -->
+                <div class="event-card bg-white rounded shadow mb-4 hover-shadow-lg transition-all" data-category="gymnastics">
+                    <div class="event-card-header d-flex align-items-center p-4 bg-gradient-primary-light">
+                        <i class="fas fa-balance-scale event-icon text-primary"></i>
+                        <h3 class="mb-0 fw-medium">体操</h3>
+                    </div>
+                    <div class="event-card-body p-4">
+                        <p class="mb-4">体操是一项展示力量、柔韧性和协调性的运动，全运会的体操比赛汇聚了全国顶尖的体操运动员，展现了中国体操的高水平。</p>
+                        
+                        <div class="event-rules bg-light-primary rounded p-4 border-l-4 border-primary">
+                            <h5 class="fw-medium mb-2">项目规则简述</h5>
+                            <p class="mb-0">体操比赛分为竞技体操、艺术体操和蹦床等项目。竞技体操包括自由体操、鞍马、吊环、跳马、双杠、单杠等项目；艺术体操包括个人全能和集体全能项目；蹦床包括个人项目。比赛时，运动员的动作将由裁判评分，得分高者获胜。</p>
+                        </div>
+                        
+                        <div class="past-champions mt-4">
+                            <h5 class="fw-medium mb-2">往届冠军</h5>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>男子个人全能：</strong> 肖若腾（北京）- 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>女子个人全能：</strong> 王妍（北京）- 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>男子团体：</strong> 贵州队 - 2017年第十三届全运会
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer p-4">
+                        <button class="btn btn-link hover-scale transition-all" type="button" data-bs-toggle="collapse" data-bs-target="#gymnasticsDetails" aria-expanded="false" aria-controls="gymnasticsDetails">
+                            查看更多详情 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="collapse" id="gymnasticsDetails">
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6>体操项目详细介绍</h6>
+                                <p>体操是一种徒手或借助器械进行各种身体操练的体育项目，具有悠久的历史和广泛的群众基础。体操运动可以锻炼身体的柔韧性、力量、平衡能力和协调能力，对提高人体的健康水平和运动能力具有重要的作用。</p>
+                                <p>竞技体操是体操运动的重要组成部分，包括男子六项和女子四项。男子六项包括自由体操、鞍马、吊环、跳马、双杠和单杠；女子四项包括跳马、高低杠、平衡木和自由体操。艺术体操是一项以自然性和韵律性动作为基础的女子竞技性体操项目，包括绳、圈、球、棒、带五种器械。蹦床是一项利用弹性床面进行跳跃和翻腾的体操项目，包括网上和单跳两个小项。</p>
+                                <h6>比赛项目</h6>
+                                <ul>
+                                    <li>男子项目：自由体操、鞍马、吊环、跳马、双杠、单杠、个人全能、团体</li>
+                                    <li>女子项目：跳马、高低杠、平衡木、自由体操、个人全能、团体</li>
+                                    <li>艺术体操：个人全能、集体全能</li>
+                                    <li>蹦床：男子网上个人、女子网上个人、男子单跳个人、女子单跳个人</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                            查看更多详情 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="collapse" id="trackAndFieldDetails">
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6>田径项目详细介绍</h6>
+                                <p>田径运动是各项体育运动的基础，它能全面地、有效地发展人的身体素质和运动技能，对其他各项运动技术的发展和成绩的提高都有很好的作用。因此，各项体育运动都把田径运动作为发展身体素质的训练手段。实践证明，许多优秀运动员，特别是球类运动员，都有较高的田径运动能力。</p>
+                                <p>田径运动包括竞走、跑、跳跃、投掷以及由跑、跳、跃、投掷的部分项目组成的全能运动，共计四十多项。以时间计算成绩的项目叫径赛；以高度或远度计算成绩的项目叫田赛；全能运动项目，则是以各单项成绩按《田径运动评分表》换算分数计算成绩。</p>
+                                <h6>比赛项目</h6>
+                                <ul>
+                                    <li>径赛项目：100米、200米、400米、800米、1500米、5000米、10000米、110米栏、400米栏、3000米障碍、4×100米接力、4×400米接力</li>
+                                    <li>田赛项目：跳高、撑杆跳高、跳远、三级跳远、铅球、铁饼、链球、标枪</li>
+                                    <li>全能项目：男子十项全能、女子七项全能</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    
+                                    <li>男子项目：48公斤级、52公斤级、56公斤级、60公斤级、65公斤级、70公斤级、75公斤级、80公斤级、85公斤级、90公斤级、100公斤级</li>
+                                    <li>女子项目：48公斤级、52公斤级、56公斤级、60公斤级、65公斤级、70公斤级</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 体操 -->
+            <div class="tab-pane fade" id="gymnastics" role="tabpanel" aria-labelledby="gymnastics-tab">
+                <div class="event-card bg-white rounded shadow mb-4 hover-shadow-lg transition-all">
+                    <div class="event-card-header d-flex align-items-center p-4 bg-gradient-primary-light">
+                        <i class="fas fa-balance-scale event-icon text-primary"></i>
+                        <h3 class="mb-0 fw-medium">体操</h3>
+                    </div>
+                    <div class="event-card-body p-4">
+                        <p class="mb-4">体操是一项展示力量、柔韧性和协调性的运动，全运会的体操比赛汇聚了全国顶尖的体操运动员，展现了中国体操的高水平。</p>
+                        
+                        <div class="event-rules bg-light-primary rounded p-4 border-l-4 border-primary">
+                            <h5 class="fw-medium mb-2">项目规则简述</h5>
+                            <p class="mb-0">体操比赛分为竞技体操、艺术体操和蹦床等项目。竞技体操包括自由体操、鞍马、吊环、跳马、双杠、单杠等项目；艺术体操包括个人全能和集体全能项目；蹦床包括个人项目。比赛时，运动员的动作将由裁判评分，得分高者获胜。</p>
+                        </div>
+                        
+                        <div class="past-champions mt-4">
+                            <h5 class="fw-medium mb-2">往届冠军</h5>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>男子个人全能：</strong> 肖若腾（北京）- 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>女子个人全能：</strong> 王妍（北京）- 2017年第十三届全运会
+                            </div>
+                            <div class="champion-item bg-light-primary rounded p-3 border-l-4 border-primary mb-2">
+                                <strong>男子团体：</strong> 贵州队 - 2017年第十三届全运会
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer p-4">
+                        <button class="btn btn-link hover-scale transition-all" type="button" data-bs-toggle="collapse" data-bs-target="#gymnasticsDetails" aria-expanded="false" aria-controls="gymnasticsDetails">
+                            查看更多详情 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="collapse" id="gymnasticsDetails">
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6>体操项目详细介绍</h6>
+                                <p>体操是一种徒手或借助器械进行各种身体操练的体育项目，具有悠久的历史和广泛的群众基础。体操运动可以锻炼身体的柔韧性、力量、平衡能力和协调能力，对提高人体的健康水平和运动能力具有重要的作用。</p>
+                                <p>竞技体操是体操运动的重要组成部分，包括男子六项和女子四项。男子六项包括自由体操、鞍马、吊环、跳马、双杠和单杠；女子四项包括跳马、高低杠、平衡木和自由体操。艺术体操是一项以自然性和韵律性动作为基础的女子竞技性体操项目，包括绳、圈、球、棒、带五种器械。蹦床是一项利用弹性床面进行跳跃和翻腾的体操项目，包括网上和单跳两个小项。</p>
+                                <h6>比赛项目</h6>
+                                <ul>
+                                    <li>男子项目：自由体操、鞍马、吊环、跳马、双杠、单杠、个人全能、团体</li>
+                                    <li>女子项目：跳马、高低杠、平衡木、自由体操、个人全能、团体</li>
+                                    <li>艺术体操：个人全能、集体全能</li>
+                                    <li>蹦床：男子网上个人、女子网上个人、男子单跳个人、女子单跳个人</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>关于我们</h5>
+                    <p>全国运动会是中国规模最大、水平最高的综合性体育赛事，每四年举办一次。本网站为您提供全国运动会的赛事日程、项目介绍、运动员风采等信息。</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>联系方式</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt"></i> 地址：北京市朝阳区国家体育总局</li>
+                        <li><i class="fas fa-phone"></i> 电话：010-12345678</li>
+                        <li><i class="fas fa-envelope"></i> 邮箱：info@nationalgames.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>关注我们</h5>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-weibo"></i> 新浪微博</a>
+                        <a href="#" target="_blank"><i class="fab fa-weixin"></i> 微信公众号</a>
+                        <a href="#" target="_blank"><i class="fab fa-qq"></i> QQ群</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                    <p>&copy; 2024 全国运动会官方网站. 保留所有权利.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入Bootstrap JS -->
+    <script src="js/bootstrap.bundle.min.js" defer></script>
+    <!-- 引入自定义JS -->
+    <script src="js/script.js" defer></script>
+    <script>
+        // 赛事项目页特定功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化分类导航
+            initCategoryNav();
+            
+            // 增强卡片交互
+            enhanceCardInteraction();
+            
+            // 增强折叠面板交互
+            enhanceCollapseInteraction();
+        });
+        
+        // 初始化分类导航
+        function initCategoryNav() {
+            const navLinks = document.querySelectorAll('.category-nav .nav-link');
+            const eventCards = document.querySelectorAll('.event-card');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // 移除所有激活状态
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // 添加当前激活状态
+                    this.classList.add('active');
+                    
+                    // 添加点击动画效果
+                    this.classList.add('clicked');
+                    setTimeout(() => {
+                        this.classList.remove('clicked');
+                    }, 300);
+                    
+                    // 获取当前分类
+                    const category = this.getAttribute('data-bs-target').substring(1);
+                    
+                    // 显示或隐藏项目卡片
+                    eventCards.forEach(card => {
+                        if (category === 'all') {
+                            // 显示所有卡片
+                            card.style.display = 'block';
+                        } else {
+                            // 只显示对应分类的卡片
+                            if (card.getAttribute('data-category') === category) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+                
+                // 添加键盘导航支持
+                link.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        }
+        
+        // 增强卡片交互
+        function enhanceCardInteraction() {
+            const cards = document.querySelectorAll('.event-card');
+            
+            cards.forEach(card => {
+                // 添加悬停效果
+                card.addEventListener('mouseenter', function() {
+                    this.classList.add('hovered');
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.classList.remove('hovered');
+                });
+                
+                // 添加点击效果
+                card.addEventListener('click', function(e) {
+                    // 如果点击的是按钮或链接，则不添加卡片点击效果
+                    if (e.target.closest('button') || e.target.closest('a')) {
+                        return;
+                    }
+                    
+                    this.classList.add('clicked');
+                    setTimeout(() => {
+                        this.classList.remove('clicked');
+                    }, 300);
+                });
+            });
+        }
+        
+        // 增强折叠面板交互
+        function enhanceCollapseInteraction() {
+            const collapseButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
+            
+            collapseButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-bs-target');
+                    const target = document.querySelector(targetId);
+                    
+                    // 添加旋转动画效果
+                    const icon = this.querySelector('.fas');
+                    if (icon) {
+                        if (target.classList.contains('show')) {
+                            icon.style.transform = 'rotate(0deg)';
+                        } else {
+                            icon.style.transform = 'rotate(180deg)';
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
